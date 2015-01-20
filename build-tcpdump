@@ -18,12 +18,12 @@
 # --------------------------------------
 
 # default, edit version 
-tcpdump_ver=4.4.0
-libpcap_ver=1.4.0
-android_api_def=9
+tcpdump_ver=4.6.2
+libpcap_ver=1.6.2
+android_api_def=21
 
 #-------------------------------------------------------#
-ndk_dir_def=android-ndk-r9
+ndk_dir_def=android-ndk-r10
 
 tcpdump_dir=tcpdump-${tcpdump_ver}
 libpcap_dir=libpcap-${libpcap_ver}
@@ -171,7 +171,7 @@ exit_error()
 	echo "|_____________________|"
 
 	chmod +x configure
-	./configure --host=arm-linux --with-pcap=linux ac_cv_linux_vers=2
+	./configure --host=arm-linux --enable-ipv6 --with-pcap=linux ac_cv_linux_vers=2
 
 	if [ $? -ne 0 ]
 	then
