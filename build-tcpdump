@@ -204,7 +204,8 @@ exit_error()
 	echo "|_____________________|"
 	
 	chmod +x configure
-	./configure --host=arm-linux --with-pcap=linux ac_cv_linux_vers=2 --with-crypto=no
+	./configure --host=arm-linux --disable-ipv6 --with-pcap=linux ac_cv_linux_vers=2\
+        --with-crypto=no CFLAGS='-fPIE' LDFLAGS='-fPIE -pie'
 
 	if [ $? -ne 0 ]
 	then
@@ -221,7 +222,7 @@ exit_error()
 	sed -i".bak" "s/endprotoent/\/\/endprotoent/g" print-isakmp.c
 	
 	#NBBY is not defined => FORCE definition
-	make CFLAGS=-DNBBY=8 # for tcpdump < 4.2.1 (CFLAGS refefined in Makefile) => just make
+	make  CFLAGS='-DNBBY=8 -fPIE' LDFLAGS='-fPIE -pie' # for tcpdump < 4.2.1 (CFLAGS refefined in Makefile) => just make
 	
 	if [ $? -ne 0 ]
 	then
